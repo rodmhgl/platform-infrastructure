@@ -12,18 +12,18 @@ terraform {
     }
   }
 
-  # Commented out for development
-  # TODO: Uncomment and configure for remote state
+  # Uncomment for remote state:
   # backend "azurerm" {
-  #   resource_group_name  = "tfstate-rg"
-  #   storage_account_name = "yourstatesa"
+  #   resource_group_name  = "rg-tfstate"
+  #   storage_account_name = "stbackstacktfstate"
   #   container_name       = "tfstate"
-  #   key                  = "back-stack.tfstate"
+  #   key                  = "back-stack/dev.tfstate"
   # }
 }
 
 provider "azurerm" {
   subscription_id = var.subscription_id
+
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -32,4 +32,3 @@ provider "azurerm" {
 }
 
 provider "azuread" {}
-
