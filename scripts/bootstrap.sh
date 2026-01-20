@@ -104,13 +104,24 @@ ARGOCD_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o js
 
 # Wait for LoadBalancer IP
 log_info "Waiting for Argo CD LoadBalancer IP..."
-while true; do
+MAX_WAIT_SECONDS=300
+SLEEP_INTERVAL=5
+ELAPSED=0
+
+while [ "$ELAPSED" -lt "$MAX_WAIT_SECONDS" ]; do
     ARGOCD_IP=$(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null || echo "")
     if [ -n "$ARGOCD_IP" ]; then
         break
     fi
-    sleep 5
+    sleep "$SLEEP_INTERVAL"
+    ELAPSED=$((ELAPSED + SLEEP_INTERVAL))
 done
+
+if [ -z "${ARGOCD_IP:-}" ]; then
+    log_error "Timed out after ${MAX_WAIT_SECONDS}s waiting for LoadBalancer IP"
+    log_error "Check 'argocd-server' service and Azure Load Balancer status"
+    exit 1
+fi
 
 # -----------------------------------------------------------------------------
 # Create App of Apps
