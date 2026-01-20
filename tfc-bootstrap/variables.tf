@@ -44,6 +44,7 @@ variable "arm_client_secret" {
 variable "arm_tenant_id" {
   description = "Azure Tenant ID"
   type        = string
+  sensitive   = true
 }
 
 # Environment-specific Azure Subscriptions

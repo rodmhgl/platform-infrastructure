@@ -5,14 +5,14 @@ locals {
       sku_tier            = "Free"
       prevent_rg_deletion = false
       auto_apply          = true
-      terraform_version   = "~> 1.9.0"
+      terraform_version   = "~> 1.14.0"
     }
     prod = {
       subscription_id     = var.prod_subscription_id
       sku_tier            = "Standard"
       prevent_rg_deletion = true
       auto_apply          = false
-      terraform_version   = "~> 1.9.0"
+      terraform_version   = "~> 1.14.0"
     }
   }
 }
@@ -62,6 +62,7 @@ resource "tfe_variable" "arm_tenant_id" {
   key             = "ARM_TENANT_ID"
   value           = var.arm_tenant_id
   category        = "env"
+  sensitive       = true
   variable_set_id = tfe_variable_set.azure_auth.id
 }
 
@@ -124,7 +125,8 @@ resource "tfe_variable" "prevent_rg_deletion" {
   for_each = local.environments
 
   key             = "prevent_rg_deletion"
-  value           = tostring(each.value.prevent_rg_deletion)
+  # value           = tostring(each.value.prevent_rg_deletion)
+  value           = each.value.prevent_rg_deletion
   hcl             = true
   category        = "terraform"
   variable_set_id = tfe_variable_set.env[each.key].id

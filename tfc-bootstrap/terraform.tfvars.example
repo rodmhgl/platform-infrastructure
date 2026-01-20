@@ -11,7 +11,7 @@ vcs_branch        = "main"
 working_directory = ""  # Leave empty if repo root is the terraform directory
 
 # Azure Service Principal
-# Create with: az ad sp create-for-rbac --name "tfc-back-stack" --role Contributor --scopes /subscriptions/<sub-id>
+# Create with: az ad sp create-for-rbac --name "tfc-back-stack" --role Contributor --scopes /subscriptions/YOUR_SUBSCRIPTION_ID
 arm_client_id     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 arm_client_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 arm_tenant_id     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
