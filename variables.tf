@@ -5,7 +5,7 @@ variable "subscription_id" {
 }
 
 variable "prevent_rg_deletion" {
-  description = "Prevent deletion of resource groups containing resources. Set to true for production."
+  description = "Prevent deletion of resource groups containing resources. Defaults to true (production-safe). Set to false for dev workspaces."
   type        = bool
   default     = true
 }
@@ -35,9 +35,9 @@ variable "cluster_name_prefix" {
 
 # Kubernetes configuration
 variable "kubernetes_version" {
-  description = "Kubernetes version for the AKS cluster"
+  description = "Kubernetes version for the AKS cluster (e.g., \"1.31.3\"). Set to null to use AKS default."
   type        = string
-  default     = "1.31"
+  default     = null
 }
 
 variable "sku_tier" {

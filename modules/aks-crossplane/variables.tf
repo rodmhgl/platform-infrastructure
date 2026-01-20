@@ -22,7 +22,7 @@ variable "cluster_name_prefix" {
 variable "kubernetes_version" {
   description = "Kubernetes version for the AKS cluster"
   type        = string
-  default     = "1.34"
+  default     = null
 }
 
 variable "sku_tier" {
