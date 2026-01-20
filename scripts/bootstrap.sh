@@ -88,7 +88,14 @@ log_info "Installing Argo CD..."
 # --force-conflicts takes ownership of previously managed fields during upgrade.
 # Note: Custom mods to manifest-defined fields will be overwritten.
 # Path relative to repository root
-GITOPS_PATH="${SCRIPT_DIR}/../../platform-gitops/argocd/install/"
+GITOPS_PATH="${GITOPS_PATH:-${SCRIPT_DIR}/../../platform-gitops/argocd/install/}"
+
+if [[ ! -d "$GITOPS_PATH" ]]; then
+    log_error "GitOps path not found: ${GITOPS_PATH}"
+    log_error "Ensure platform-gitops is cloned as a sibling directory, or set GITOPS_PATH environment variable"
+    exit 1
+fi
+
 kubectl apply --server-side --force-conflicts -k "$GITOPS_PATH"
 
 log_info "Waiting for Argo CD to be ready..."
