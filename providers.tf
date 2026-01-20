@@ -11,14 +11,6 @@ terraform {
       version = "~> 2.47"
     }
   }
-
-  # Uncomment for remote state:
-  # backend "azurerm" {
-  #   resource_group_name  = "rg-tfstate"
-  #   storage_account_name = "stbackstacktfstate"
-  #   container_name       = "tfstate"
-  #   key                  = "back-stack/dev.tfstate"
-  # }
 }
 
 provider "azurerm" {
@@ -26,7 +18,7 @@ provider "azurerm" {
 
   features {
     resource_group {
-      prevent_deletion_if_contains_resources = false
+      prevent_deletion_if_contains_resources = var.prevent_rg_deletion
     }
   }
 }
