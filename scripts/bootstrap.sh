@@ -98,10 +98,6 @@ kubectl wait --for=condition=available --timeout=300s deployment/argocd-server -
 # Get Argo CD credentials
 # -----------------------------------------------------------------------------
 
-log_info "Retrieving Argo CD admin password..."
-
-ARGOCD_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-
 # Wait for LoadBalancer IP
 log_info "Waiting for Argo CD LoadBalancer IP..."
 while true; do
@@ -155,7 +151,9 @@ echo "=============================================="
 echo ""
 echo "Argo CD URL: http://${ARGOCD_IP}"
 echo "Username: admin"
-echo "Password: ${ARGOCD_PASSWORD}"
+echo ""
+echo "To retrieve the admin password securely, run:"
+echo "  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=\"{.data.password}\" | base64 -d && echo"
 echo ""
 echo "Next steps:"
 echo "1. Create the '${GITOPS_REPO}' repository in GitHub org '${GITHUB_ORG}'"
