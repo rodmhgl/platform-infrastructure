@@ -55,12 +55,10 @@ output "crossplane_identity_principal_id" {
 # Azure context
 output "subscription_id" {
   description = "Azure subscription ID"
-  sensitive   = true
   value       = module.aks_crossplane.subscription_id
 }
 
 output "tenant_id" {
   description = "Azure tenant ID"
-  sensitive   = true
   value       = module.aks_crossplane.tenant_id
 }
