@@ -1,0 +1,24 @@
+# TFC Organization (required)
+tfc_organization = "your-org-name"
+
+# GitHub OAuth Token ID
+# Find this in TFC: Organization Settings > VCS Providers > GitHub > OAuth Token ID
+github_oauth_token_id = "ot-xxxxxxxxxxxxxxxxxx"
+
+# Repository settings
+github_repository = "githubusername/platform-infrastructure"
+vcs_branch        = "main"
+working_directory = ""  # Leave empty if repo root is the terraform directory
+
+# Azure Service Principal
+# Create with: az ad sp create-for-rbac --name "tfc-back-stack" --role Contributor --scopes /subscriptions/YOUR_SUBSCRIPTION_ID
+arm_client_id     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+arm_client_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+arm_tenant_id     = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# Environment-specific subscriptions (can be the same for single-sub setups)
+dev_subscription_id  = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+prod_subscription_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# Project naming
+project_name = "back-stack"
